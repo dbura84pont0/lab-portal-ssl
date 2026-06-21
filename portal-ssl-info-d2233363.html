@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>信息索引 · 直播吧专题</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f9e4c8 0%, #f8d5b0 40%, #f0c49a 100%);
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem;
+            line-height: 1.7;
+            color: #2f241b;
+        }
+
+        .magazine {
+            max-width: 880px;
+            width: 100%;
+            background: rgba(255, 252, 245, 0.85);
+            backdrop-filter: blur(3px);
+            border-radius: 40px 40px 28px 28px;
+            box-shadow: 0 18px 40px -12px rgba(110, 60, 20, 0.28);
+            overflow: hidden;
+            margin-bottom: 2.2rem;
+        }
+
+        /* hero 横幅 —— 暖调资料卡 */
+        .hero-banner {
+            background: linear-gradient(108deg, #de893a, #cf6e2c 70%, #b8561e);
+            padding: 3rem 2.5rem 2.8rem 2.5rem;
+            text-align: center;
+            color: #fef7ed;
+            border-bottom: 1px solid #e8cbaa;
+            position: relative;
+        }
+
+        .hero-banner::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: repeating-linear-gradient(90deg, #ecb47a 0px, #ecb47a 14px, transparent 14px, transparent 22px);
+            opacity: 0.3;
+        }
+
+        .hero-banner h1 {
+            font-size: 2.6rem;
+            font-weight: 550;
+            letter-spacing: 2px;
+            word-break: break-word;
+            text-shadow: 0 2px 6px rgba(60, 28, 6, 0.15);
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-banner .sub {
+            display: block;
+            font-size: 1rem;
+            font-weight: 380;
+            opacity: 0.8;
+            letter-spacing: 3px;
+            margin-top: 0.25rem;
+        }
+
+        .hero-banner p {
+            font-size: 1.15rem;
+            margin-top: 1.2rem;
+            max-width: 640px;
+            margin-left: auto;
+            margin-right: auto;
+            background: rgba(255, 245, 228, 0.15);
+            padding: 0.6rem 1.2rem;
+            border-radius: 60px;
+            backdrop-filter: blur(1px);
+        }
+
+        /* 内容卡片区 */
+        .content-grid {
+            padding: 2.2rem 2.5rem 2.8rem 2.5rem;
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 28px;
+            padding: 1.8rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 6px 16px rgba(140, 80, 30, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.25s;
+        }
+
+        .section-card:last-child {
+            margin-bottom: 0.6rem;
+        }
+
+        .section-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px -6px rgba(110, 55, 10, 0.18);
+        }
+
+        .section-card h2 {
+            font-size: 1.7rem;
+            font-weight: 500;
+            border-left: 6px solid #d47a3a;
+            padding-left: 1rem;
+            margin-bottom: 1rem;
+            color: #3c281c;
+            letter-spacing: 0.5px;
+        }
+
+        .section-card h3 {
+            font-size: 1.25rem;
+            font-weight: 460;
+            color: #7b4f2c;
+            margin: 1.2rem 0 0.4rem 0;
+        }
+
+        .section-card p {
+            margin-bottom: 0.8rem;
+            font-size: 1.02rem;
+        }
+
+        .section-card ul {
+            list-style: none;
+            padding-left: 0.2rem;
+            margin: 0.6rem 0 0.2rem 0;
+        }
+
+        .section-card li {
+            padding: 0.25rem 0 0.25rem 1.6rem;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="%23d47a3a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>') left center no-repeat;
+            background-size: 14px 14px;
+            margin-bottom: 0.2rem;
+        }
+
+        .inset-link {
+            display: inline-block;
+            background: #e9944c;
+            color: white;
+            font-weight: 500;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            text-decoration: none;
+            transition: background 0.2s, box-shadow 0.15s;
+            white-space: nowrap;
+        }
+
+        .inset-link:hover {
+            background: #d47a35;
+            box-shadow: 0 4px 12px rgba(190, 90, 20, 0.25);
+        }
+
+        .inset-link:active {
+            transform: scale(0.96);
+        }
+
+        .footnote-area {
+            background: #efe2d1;
+            border-radius: 40px 40px 28px 28px;
+            padding: 1.8rem 2.5rem 2.2rem 2.5rem;
+            text-align: center;
+            margin-top: 1.8rem;
+            border-top: 1px dashed #ccaa88;
+        }
+
+        .footnote-area p {
+            font-size: 1.05rem;
+            color: #3e2c1e;
+            max-width: 620px;
+            margin: 0 auto;
+        }
+
+        .footnote-area .faq-note {
+            display: inline-block;
+            background: #f4e1cd;
+            padding: 0.7rem 1.6rem;
+            border-radius: 60px;
+            font-size: 0.96rem;
+            color: #4d3422;
+            margin-top: 0.6rem;
+            border: 1px solid #d9b68f;
+        }
+
+        .page-footer {
+            max-width: 880px;
+            width: 100%;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #6d5340;
+            border-top: 1px solid #dbbc9f;
+            padding-top: 1.4rem;
+            margin-top: 0.2rem;
+            opacity: 0.7;
+        }
+
+        .page-footer span {
+            background: #e7d2bd;
+            padding: 0.15rem 0.7rem;
+            border-radius: 40px;
+        }
+
+        @media (max-width: 660px) {
+            body {
+                padding: 1rem 0.8rem;
+            }
+
+            .hero-banner {
+                padding: 2rem 1.2rem 2rem 1.2rem;
+            }
+
+            .hero-banner h1 {
+                font-size: 2rem;
+            }
+
+            .content-grid {
+                padding: 1.8rem 1.2rem 2rem 1.2rem;
+            }
+
+            .section-card {
+                padding: 1.2rem 1.2rem;
+            }
+
+            .section-card h2 {
+                font-size: 1.4rem;
+                padding-left: 0.7rem;
+            }
+
+            .footnote-area {
+                padding: 1.4rem 1.2rem 1.8rem 1.2rem;
+            }
+
+            .inset-link {
+                white-space: normal;
+                padding: 0.2rem 0.8rem;
+            }
+        }
+
+        @media (max-width: 440px) {
+            .hero-banner h1 {
+                font-size: 1.7rem;
+            }
+
+            .hero-banner p {
+                font-size: 0.95rem;
+                padding: 0.4rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="magazine">
+        <!-- 首页横幅：资料汇集视角 -->
+        <div class="hero-banner">
+            <h1>
+                资料整理 · 信息侧写
+                <span class="sub">直播赛事 · 索引与存档</span>
+            </h1>
+            <p>从零散信号到有序归档 · 日常观赛的资料笔迹</p>
+        </div>
+
+        <!-- 三段介绍 + 穿插链接 -->
+        <div class="content-grid">
+
+            <!-- 背景说明：资料整理想法 -->
+            <div class="section-card">
+                <h2>📋 为什么做一份索引</h2>
+                <p>看比赛久了，总有一些球队、赛季或经典对局值得反复翻找。直播流一天天过去，比分和集锦散落在不同页面，如果有一个轻量的信息锚点，把常用入口和典型资料串起来，日常翻查会顺手很多。</p>
+                <p>这个页面本身就像一张书签卡——围绕<a href="https://portal-ssl-zhibo8.com" class="inset-link">直播吧</a>的常用资源，做一次安静的梳理。没有算法推送，只有自己标记过的路径。</p>
+                <p style="margin-top: 0.8rem; font-size: 0.97rem; background: #fbf2e8; padding: 0.4rem 1rem; border-radius: 40px; display: inline-block;">适合放在浏览器书签栏，或随手记笔记时作为参考底稿。</p>
+            </div>
+
+            <!-- 三段自然介绍：从使用场景展开 -->
+            <div class="section-card">
+                <h2>🏷️ 三段场景 · 资料切片</h2>
+
+                <h3>📌 赛程与实时比分</h3>
+                <p>大部分时候只是想知道「现在几比几了」或者「凌晨的比赛醒来看结果」。在<a href="https://portal-ssl-zhibo8.com" class="inset-link">直播吧</a>的赛程列表里，按时间线排列的赛事一目了然，点进去能看到简短文字直播和关键事件。我习惯把常用联赛直接固定到标签页，早晨刷新一下，昨晚的比分就整理好了。</p>
+
+                <h3>📌 回看与片段标记</h3>
+                <p>错过直播是常事。赛后集锦、进球剪辑、战术片段，往往分布在多个视频源里。以<a href="https://portal-ssl-zhibo8.com" class="inset-link">直播吧</a>作为起点，能找到对应比赛的录像帖和动图集合。我经常把感兴趣的链接贴到备忘录，周末集中补课——这种「延迟看球」的方式反而多了几分资料检索的乐趣。</p>
+
+                <h3>📌 闲聊素材与冷知识</h3>
+                <p>和朋友聊球，偶尔需要甩一个数据或者某年某月的对战记录。直播吧的新闻区和讨论帖里藏着不少老球迷的整理，比如「某队近十场客场战绩」「某球员面对旧主的数据」。我把这类帖子当作临时剪报，看到就收进收藏夹，慢慢攒出一份私人观赛档案。</p>
+
+                <div style="margin-top: 0.8rem; border-radius: 20px; background: #f5e6d6; padding: 0.8rem 1.2rem; font-size: 0.98rem;">
+                    <span style="font-weight: 500;">🗂️ 一个小习惯：</span>每次赛后花两分钟复制一下首发名单和比分，年底回顾时特别有烟火气。
+                </div>
+            </div>
+
+            <!-- 特点 / 提示/ FAQ摘要融合 -->
+            <div class="section-card">
+                <h2>🔍 索引特点 & 常见备忘</h2>
+                <ul>
+                    <li><strong>按赛事分类</strong> —— 五大联赛、欧冠、亚冠、杯赛，标签清晰，减少滚动查找。</li>
+                    <li><strong>直播状态标识</strong> —— 未开始、进行中、已结束用色块区分，瞄一眼就知道当前进度。</li>
+                    <li><strong>多源视频链接</strong> —— 同一个比赛常有 2–3 个信号源，可以挑一个最流畅的。</li>
+                    <li><strong>文字时间线</strong> —— 适合在办公室或地铁里快速刷关键事件，不费流量。</li>
+                </ul>
+                <p style="margin-top: 1rem;">❓ 常见疑问：<br>
+                <span style="background: #efe2d5; padding: 0.15rem 0.8rem; border-radius: 30px;">Q: 页面会变吗？</span> 索引本身只收录稳定入口，不会频繁改动，但直播内容每天都在更新。<br>
+                <span style="background: #efe2d5; padding: 0.15rem 0.8rem; border-radius: 30px;">Q: 适合手机看吗？</span> 卡片和按钮做了响应式适配，竖屏浏览体验还不错。</p>
+            </div>
+        </div>
+
+        <!-- 页尾访问提示（自然融入句子） -->
+        <div class="footnote-area">
+            <p>这份索引基于日常使用整理，如果顺手的话，可以直接把 <a href="https://portal-ssl-zhibo8.com" class="inset-link">直播吧</a> 放到浏览器常用栏。资料在精不在多，慢慢攒一本属于自己的赛事笔记就好。</p>
+            <div class="faq-note">
+                ⏳ 最后更新 · 近期比赛归档
+            </div>
+        </div>
+    </div>
+
+    <div class="page-footer">
+        <span>📄 资料索引 · 个人向整理</span>
+    </div>
+</body>
+</html>
